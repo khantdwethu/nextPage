@@ -3,13 +3,11 @@ package com.sample.myapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.widget.Button
 import com.sample.myapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var mainBinding: ActivityMainBinding
-    lateinit var adapter: Adapter
+    lateinit var nameAdapter: NameAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_main)
@@ -17,12 +15,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(mainBinding.root)
 
         var name = listOf("mg","kyaw","win");
-        adapter = Adapter(name);
+        nameAdapter = NameAdapter(name);
+        mainBinding.recyclerList.adapter = nameAdapter;
 
 
         //next page
         mainBinding.btn.setOnClickListener {
             val intent = Intent(this,SecondActivity::class.java)
+//            to pass data to second page
+            intent.putExtra("username","Alice")
+//            to show second page
             startActivity(intent);
         }
 
